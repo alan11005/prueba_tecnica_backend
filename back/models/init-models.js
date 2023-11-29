@@ -1,35 +1,18 @@
-var DataTypes = require("sequelize").DataTypes;
-var _customers = require("./customers");
-var _employees = require("./employees");
-var _offices = require("./offices");
-var _orderdetails = require("./orderdetails");
-var _orders = require("./orders");
-var _payments = require("./payments");
-var _product_lines = require("./product_lines");
-var _products = require("./products");
+const {Customer, CustomerSchema} = require('./customers');
+const {Order, OrderSchema} = require('./orders');
+const {OrderDetail, OrderDetailSchema} = require('./orderdetails');
+const {Product, ProductSchema} = require('./products');
 
 function initModels(sequelize) {
-  var customers = _customers(sequelize, DataTypes);
-  var employees = _employees(sequelize, DataTypes);
-  var offices = _offices(sequelize, DataTypes);
-  var orderdetails = _orderdetails(sequelize, DataTypes);
-  var orders = _orders(sequelize, DataTypes);
-  var payments = _payments(sequelize, DataTypes);
-  var product_lines = _product_lines(sequelize, DataTypes);
-  var products = _products(sequelize, DataTypes);
+  Product.init(ProductSchema, Product.config(sequelize));
+  OrderDetail.init(OrderDetailSchema, OrderDetail.config(sequelize));
+  Order.init(OrderSchema, Order.config(sequelize));
+  Customer.init(CustomerSchema, Customer.config(sequelize));
 
-
-  return {
-    customers,
-    employees,
-    offices,
-    orderdetails,
-    orders,
-    payments,
-    product_lines,
-    products,
-  };
+  OrderDetail.associate(sequelize.models);
+  Order.associate(sequelize.models);
+  Customer.associate(sequelize.models);
+  Product.associate(sequelize.models);
 }
+
 module.exports = initModels;
-module.exports.initModels = initModels;
-module.exports.default = initModels;

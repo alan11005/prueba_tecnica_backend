@@ -5,12 +5,16 @@ class orderDetailService {
   constructor(){
   }
   async find() {
-    const orderdetails = await models.orderdetails.findAll();
+    const orderdetails = await models.OrderDetail.findAll();
     return orderdetails;
   }
 
   async findOne(id) {
-    const orderdetail = await models.orderdetails.findByPk(id)
+    const orderdetail = await models.OrderDetail.findAll({
+      where: {
+        order_number: id
+      }
+    })
     return orderdetail;
   }
 }

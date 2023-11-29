@@ -5,12 +5,12 @@ class productService {
   constructor(){
   }
   async find() {
-    const products = await models.products.findAll();
+    const products = await models.Product.findAll();
     return products;
   }
 
   async findOne(id) {
-    const product = await models.products.findByPk(id)
+    const product = await models.Product.findByPk(id)
     return product;
   }
 }

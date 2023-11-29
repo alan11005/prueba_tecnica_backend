@@ -5,12 +5,12 @@ class customerService {
   constructor(){
   }
   async find() {
-    const customers = await models.customers.findAll();
+    const customers = await models.Customer.findAll();
     return customers;
   }
 
   async findOne(id) {
-    const customer = await models.customers.findByPk(id)
+    const customer = await models.Customer.findByPk(id)
     return customer;
   }
 }
